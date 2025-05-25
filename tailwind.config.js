@@ -1,8 +1,13 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
   content: ["./src/**/*.{html,js,tsx,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        archivo: ["'Archivo'", "sans-serif"],
+        anton: ["'Anton'", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
