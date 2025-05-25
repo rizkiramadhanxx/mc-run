@@ -1,95 +1,89 @@
-import { FcCalendar } from "react-icons/fc";
-import { Pattern } from "../common/Pattern";
-import { useCountdownDay } from "../../hooks/useCountdownDay";
-
 export default function HeroSection() {
-  const { day, hours, minute, second } = useCountdownDay(
-    new Date("2025-05-01T00:00:00Z")
-  );
   return (
     <section
       id="home"
       // bg image
-      className="relative bg-[linear-gradient(to_bottom_right,_rgba(0,0,0,0.4),_rgba(0,0,0,1)),url('https://images.unsplash.com/photo-1613937574892-25f441264a09?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"
+      className="relative px-2 bg-[linear-gradient(to_bottom_right,_rgba(0,0,0,0.4),_rgba(0,0,0,1)),url('/images/background-hero.jpg')] bg-cover bg-center"
     >
-      <Pattern />
+      {/* <Pattern /> */}
       <header className="grid grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
-        <div className="md:flex flex-1 hidden  h-full flex-col justify-center items-start">
-          <img
+        <div className="md:flex flex-1 hidden h-full flex-col justify-center items-start">
+          {/* <img
             data-aos="zoom-in"
-            src="https://run.alfamart.co.id/static/images/logo_alfamartrun.png"
+            src="/images/run-left.png"
+            className="w-full"
             alt="logo"
-            className=" md:max-w-[500px]"
-          />
+          /> */}
         </div>
         <div className="flex h-full flex-col justify-center items-center gap-4 ">
           <div data-aos="fade-up" className="flex flex-col  gap-3 mt-4 sm:mt-8">
-            <div className="flex text-sm gap-2 justify-start  rounded-full font-medium">
-              <div className="flex p-2 md:p-4  w-[65px] md:w-[80px] text-white rounded-md bg-[#006937] flex-col items-center justify-center">
-                <div className="border-2  border-white p-2 rounded-md text-2xl">
-                  {day > 0 ? day : 0}
+            <div className="flex justify-center">
+              <img
+                src="/images/logo-white.png"
+                className="max-w-[150px] md:max-w-[300px]"
+                alt="logo"
+              />
+            </div>
+            <div className="flex flex-row items-center justify-center gap-3">
+              <div className="flex flex-col items-center rounded-md border-2    bg-gradient-to-b from-[#1fa463] to-[#0c6b3a] shadow-[inset_0_2px_0_#ffffff,inset_-2px_0_0_#ffffff,inset_2px_0_0_#00000020,inset_0_-2px_0_#00000020] py-2 px-2 justify-center text-white">
+                <div className="flex flex-row items-center sm:space-x-2 z-10 text-center sm:text-left">
+                  <h1 className="text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
+                    5K
+                  </h1>
+                  <div className="flex flex-col justify-center mt-4 sm:mt-0">
+                    <h2 className="text-[14px] md:text-[20px] ml-6 sm:ml-6 font-Anton text-nowrap leading-none italic">
+                      FUN RUN
+                    </h2>
+                    <span className="mt-2 italic bg-[#084438] sm:-ml-1 py-1 px-1 text-white text-[6px] md:text-xs font-bold rounded-sm">
+                      KATEGORI UMUM
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-2">Hari</div>
               </div>
-              <div className="flex p-2 md:p-4  w-[65px] md:w-[80px] text-white rounded-md bg-[#006937] flex-col items-center justify-center">
-                <div className="border-2 border-white p-2 rounded-md text-2xl">
-                  {hours > 0 ? hours : 0}
+
+              <div className="flex flex-col items-center rounded-md border-2    bg-gradient-to-b from-[#1fa463] to-[#0c6b3a] shadow-[inset_0_2px_0_#ffffff,inset_-2px_0_0_#ffffff,inset_2px_0_0_#00000020,inset_0_-2px_0_#00000020] py-2 px-2 justify-center text-white">
+                <div className="flex flex-row items-center sm:space-x-2 z-10 text-center sm:text-left">
+                  <h1 className="text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
+                    2,9K
+                  </h1>
+                  <div className="flex flex-col justify-center mt-4 sm:mt-0">
+                    <h2 className="text-[14px] md:text-[20px] ml-2 sm:ml-2 font-Anton text-nowrap leading-none italic">
+                      FUN RUN
+                    </h2>
+                    <span className="italic mt-2 bg-[#084438] sm:-ml-1 py-1 px-1 text-white text-[6px] md:text-[8px] font-bold rounded-sm">
+                      KATEGORI KIDS <br className="hidden sm:block" /> & FAMILY
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-2">Jam</div>
-              </div>
-              <div className="flex p-2 md:p-4  w-[65px] md:w-[80px] text-white rounded-md bg-[#006937] flex-col items-center justify-center">
-                <div className="border-2 border-white p-2 rounded-md text-2xl">
-                  {minute > 0 ? minute : 0}
-                </div>
-                <div className="mt-2">Menit</div>
-              </div>
-              <div className="flex p-2 md:p-4  w-[65px] md:w-[80px] text-white rounded-md bg-[#006937] flex-col items-center justify-center">
-                <div className="border-2 border-white p-2 rounded-md text-2xl">
-                  {second > 0 ? second : 0}
-                </div>
-                <div className="mt-2">Detik</div>
               </div>
             </div>
-            <div className="px-4 py-1 text-sm border-2 border-dashed bg-sky-100 border-sky-200 text-[#006937] rounded-full font-medium animate-pulse">
-              💤 Mari Running biar Sehat 💤
-            </div>
-            <h1 className="text-2xl lg:text-4xl lg:text-nowrap font-bold text-white">
-              Selamat Datang di <br />
-              <span
-                style={{
-                  // white shadow
-                  textShadow:
-                    "-0.8px -0.8px 0 #fff, 0.8px -0.8px 0 #fff, -0.8px 0.8px 0 #fff, 0.8px 1px 0 #fff",
-                }}
-                className="text-[#006937] font-extrabold  text-4xl lg:text-7xl"
-              >
-                MC RUN
-              </span>
-            </h1>
-            <div className="max-w-xl text-left rounded-2xl font-semibold text-gray-100 text-sm">
-              <div className="flex items-center gap-2  text-md">
-                <FcCalendar size={20} /> : Minggu, 19 Oktober 2025
-              </div>
-              <div className="flex mt-1 items-center gap-2 text-md">
-                Start : MC Mejasem Pemalang
-              </div>
-              <div className="flex mt-1 items-center gap-2 text-md">
-                Finish : MC Mejasem Purwokerto
+
+            <div className="flex justify-center">
+              <div className="font-Anton text-2xl italic px-2 py-1 bg-gradient-to-b from-white/100 to-white/5 text-[#084438]">
+                SAVE THE DATE
               </div>
             </div>
-            <div className="grid md:grid-cols-2 grid-cols-1  gap-4 pt-4 text-sm w-full">
-              <a
-                href="#join&follow"
-                className="flex justify-center items-center whitespace-nowrap bg-[#006937] hover:bg-[#055830] text-white font-semibold rounded-lg px-6 py-3 transition"
-              >
-                Daftar Sekarang
-              </a>
-              <a
-                href="#about"
-                className="justify-center flex items-center whitespace-nowrap border-1  bg-white  text-[#006937] hover:text-[#055830] font-semibold rounded-lg px-6 py-3 transition"
-              >
-                Official Instagram
-              </a>
+            <div className="flex gap-5 items-center mt-4">
+              <div className="flex flex-row items-center gap-3">
+                <div className="font-Anton text-6xl md:text-8xl text-white">
+                  31
+                </div>
+                <div className="font-Anton text-sm md:text-3xl text-white">
+                  <div>Agustus</div>
+                  <div>2025</div>
+                </div>
+              </div>
+              <div className="bg-white h-full w-[1px]"></div>
+              <div className="font-Archivo leading-none text-xl md:text-2xl text-white">
+                LINGKUNGAN <br />
+                GOR TRISANJA <br />
+                SLAWI
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="font-Anton text-2xl italic px-2 py-1 rounded-md bg-white text-[#084438]">
+                DAFTAR SEKARANG
+              </div>
             </div>
           </div>
         </div>

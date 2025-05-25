@@ -1,64 +1,161 @@
+import Slider from "react-slick";
+const dataSlider = [
+  {
+    label: "Mystery Trolley",
+    image: "/images/benefit/cheer.png",
+  },
+  {
+    label: "Potential Podium",
+    image: "/images/benefit/podium.png",
+  },
+  {
+    label: "Cheer",
+    image: "/images/benefit/cheer.png",
+  },
+  {
+    label: "Zumba Party",
+    image: "/images/benefit/cheer.png",
+  },
+  {
+    label: "The Bigger Doorprize",
+    image: "/images/benefit/best-costume.png",
+  },
+  {
+    label: "Finisher Medal",
+    image: "/images/benefit/best-costume.png",
+  },
+  {
+    label: "Bib Number",
+    image: "/images/benefit/best-costume.png",
+  },
+  {
+    label: "Running Jersey",
+    image: "/images/benefit/best-costume.png",
+  },
+];
 export default function RoutesSection() {
+  const settings = {
+    dots: false,
+    infinite: true,
+    arrows: false,
+    speed: 500,
+    slidesToShow: 8,
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 8,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <section
-      id="about"
-      className="pt-12 pb-12 z-10 flex bg-white justify-center md:px-[150px] sm:px-12 px-6"
-    >
-      <div data-aos="fade-right" className="flex w-full flex-col">
-        {/* Left Text */}
-        <div className="justify-center fade-right flex">
-          <h2 className="text-4xl font-bold text-[#055830]">Rute Lari 5 Km</h2>
+    <div>
+      <section
+        id="about"
+        className="pt-12 -z-0 flex bg-[#309c2d] justify-center md:px-[80px] sm:px-12 px-6"
+      >
+        <div data-aos="fade-right" className="flex w-full flex-col">
+          {/* Left Text */}
+          <div className="justify-center fade-right flex">
+            <h2 className=" z-10 text-3xl lg:text-5xl font-Anton italic text-center mb-6 text-white">
+              Running Route
+            </h2>
+          </div>
+
+          <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-10">
+            <div className="flex gap-3 md:gap-0 items-center flex-col md:flex-row md:justify-end">
+              <img
+                src="/vector/route-01.svg"
+                className="md:max-w-[80%] z-10 w-full"
+                alt="rute-1"
+              />
+
+              <div className="flex flex-col items-center justify-center text-white">
+                <div className="flex flex-row items-center z-10 text-center sm:text-left">
+                  <h1 className="text-[40px] md:text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
+                    5K
+                  </h1>
+                </div>
+                <div className="font-medium p-2  border-2 font-Unageo border-white rounded-md mt-4 bg-gradient-to-t from-[#205e3b]   to-[#34925d]  text-white">
+                  Detail Map
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3 md:gap-0 items-center flex-col md:flex-row md:justify-end">
+              <img
+                src="/vector/route-02.svg"
+                className="md:max-w-[80%] z-10 w-full"
+                alt="rute"
+              />
+
+              <div className="flex flex-col items-center justify-center text-white">
+                <div className="flex flex-row items-center z-10 text-center sm:text-left">
+                  <h1 className="text-[40px] md:text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
+                    2,9K
+                  </h1>
+                </div>
+                <div className="font-medium p-2  border-2 font-Unageo border-white rounded-md mt-4 bg-gradient-to-t from-[#205e3b]   to-[#34925d]  text-white">
+                  Detail Map
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="relative p-[20px] md:p-[100px] bg-cover bg-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#309c2d] to-green-300/10 z-0" />
+        <div className="absolute inset-0 bg-[url('/images/background-hero.jpg')] bg-cover bg-center z-[-1]" />
+
+        <div className="relative z-10 flex flex-col items-center justify-center text-white">
+          <div className="text-3xl lg:text-5xl font-Anton italic text-center">
+            What makes our run special?
+          </div>
+          <div className="text-3xl mt-3 lg:text-5xl font-Anton italic text-center">
+            Find out!
+          </div>
         </div>
 
-        <div className="grid w-full grid-cols-1 mt-10 lg:grid-cols-2 gap-4">
-          <div>
-            <img
-              className="max-h-[600px]"
-              src="https://run.alfamart.co.id/static/images/Rute-10K.png"
-              alt="rute"
-            />
-          </div>
-          <div className="border-[#055830] flex justify-center items-center">
-            <ol className="list-decimal pl-4 space-y-2 text-[#055830] text-base">
-              <li>
-                <strong>Start / Finish:</strong> FX Sudirman - Jl. Gatot Subroto
-              </li>
-              <li>
-                <strong>Titik 1:</strong> Menuju Bundaran Semanggi (Jl. Gatot
-                Subroto)
-              </li>
-              <li>
-                <strong>Titik 2:</strong> Belok kiri ke Jl. Jend. Sudirman (arah
-                selatan)
-              </li>
-              <li>
-                <strong>Titik 3:</strong> Lurus di Jl. Jend. Sudirman, melewati
-                SCBD
-              </li>
-              <li>
-                <strong>Titik 4:</strong> Belok kiri ke Jl. Pattimura
-              </li>
-              <li>
-                <strong>Titik 5:</strong> U-turn di ujung Jl. Pattimura (dekat
-                Trunojoyo)
-              </li>
-              <li>
-                <strong>Titik 6:</strong> Kembali ke utara di Jl. Pattimura
-              </li>
-              <li>
-                <strong>Titik 7:</strong> Masuk ke kawasan SCBD
-              </li>
-              <li>
-                <strong>Titik 8:</strong> Berputar di dalam area SCBD
-              </li>
-              <li>
-                <strong>Titik 9:</strong> Kembali ke Jl. Jend. Sudirman dan
-                finish
-              </li>
-            </ol>
-          </div>
+        <div className="relative z-10 w-full lg:w-[90%] mt-10 mx-auto bg-white p-5 rounded-md shadow-2xl">
+          <Slider {...settings}>
+            {dataSlider.map((item, index) => (
+              <div key={index}>
+                <div className="flex h-[100px] flex-col items-center justify-center text-white">
+                  <img src={item.image} alt={item.label} />
+                  <div className="mt-2 text-center font-Archivo font-bold text-[#084438]">
+                    {item.label}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

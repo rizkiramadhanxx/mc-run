@@ -33,28 +33,35 @@ export default function Navbar() {
         aria-label="Beranda"
         className="hover:text-white hidden lg:block  hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
-        Beranda
+        Home
       </a>
       <a
         href="#about"
         aria-label="Tentang"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
-        Tentang
+        Our Mission
+      </a>
+      <a
+        href="#about"
+        aria-label="Tentang"
+        className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
+      >
+        Route
       </a>
       <a
         href="#activity"
         aria-label="Aktivitas"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
-        Acara
+        Benefit
       </a>
       <a
         href="#testimony"
         aria-label="Testimoni"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
-        Testimoni
+        Registrasi
       </a>
       <img
         data-aos="zoom-in"
