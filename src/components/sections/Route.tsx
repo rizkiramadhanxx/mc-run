@@ -1,4 +1,4 @@
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 const dataSlider = [
   {
     label: "Mystery Trolley",
@@ -34,9 +34,11 @@ const dataSlider = [
   },
 ];
 export default function RoutesSection() {
-  const settings = {
+  const settings: Settings = {
     dots: false,
     infinite: true,
+    // auto play
+    autoplay: true,
     arrows: false,
     speed: 500,
     slidesToShow: 8,
