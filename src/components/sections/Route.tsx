@@ -2,7 +2,7 @@ import Slider, { Settings } from "react-slick";
 const dataSlider = [
   {
     label: "Mystery Trolley",
-    image: "/images/benefit/cheer.png",
+    image: "/images/benefit/mystery-trolley.png",
   },
   {
     label: "Potential Podium",
@@ -14,23 +14,27 @@ const dataSlider = [
   },
   {
     label: "Zumba Party",
-    image: "/images/benefit/cheer.png",
+    image: "/images/benefit/zumba.png",
   },
   {
     label: "The Bigger Doorprize",
-    image: "/images/benefit/best-costume.png",
+    image: "/images/benefit/doorprize.png",
+  },
+  {
+    label: "Best Costume Competition",
+    image: "/images/benefit/best.png",
   },
   {
     label: "Finisher Medal",
-    image: "/images/benefit/best-costume.png",
+    image: "/images/benefit/medal.png",
   },
   {
     label: "Bib Number",
-    image: "/images/benefit/best-costume.png",
+    image: "/images/benefit/bib.png",
   },
   {
     label: "Running Jersey",
-    image: "/images/benefit/best-costume.png",
+    image: "/images/benefit/baju.png",
   },
 ];
 export default function RoutesSection() {
@@ -78,7 +82,7 @@ export default function RoutesSection() {
   return (
     <div>
       <section
-        id="about"
+        id="route"
         className="pt-12 -z-0 flex bg-[#309c2d] justify-center md:px-[80px] sm:px-12 px-6"
       >
         <div data-aos="fade-right" className="flex w-full flex-col">
@@ -130,7 +134,10 @@ export default function RoutesSection() {
           </div>
         </div>
       </section>
-      <div className="relative p-[20px] md:p-[100px] bg-cover bg-center">
+      <div
+        className="relative p-[20px] md:p-[100px] bg-cover bg-center"
+        id="benefit"
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-[#309c2d] to-green-300/10 z-0" />
         <div className="absolute inset-0 bg-[url('/images/background-hero.jpg')] bg-cover bg-center z-[-1]" />
 
@@ -143,7 +150,7 @@ export default function RoutesSection() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full lg:w-[90%] mt-10 mx-auto bg-white p-5 rounded-md shadow-2xl">
+        <div className="relative z-10 w-full lg:w-[90%] mt-10 mx-auto bg-white p-5 rounded-xl shadow-2xl">
           <Slider {...settings}>
             {dataSlider.map((item, index) => (
               <div key={index}>

@@ -1,7 +1,7 @@
 export default function AboutSection() {
   return (
     <section
-      id="about"
+      id="mission"
       className="pt-12 pb-12  overflow-hidden bg-[#2e9430] z-10 flex justify-center md:px-[150px] sm:px-12 px-6"
     >
       <div

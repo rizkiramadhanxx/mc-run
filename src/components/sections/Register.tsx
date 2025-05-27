@@ -1,7 +1,9 @@
+import { URL_CTA } from "../../constant/common";
+
 export default function RegisterSection() {
   return (
     <section
-      id="about"
+      id="register"
       style={{
         background: "linear-gradient(to bottom, #055830, #006937)",
       }}
@@ -63,9 +65,12 @@ export default function RegisterSection() {
         </div>
 
         <div className="flex justify-center">
-          <button className="bg-[#e01f20] font-Unageo cursor-pointer hover:bg-[#ff0000]   text-white font-bold py-[12px] px-[40px] rounded-xl shadow-2xl border-white border-2">
+          <a
+            href={URL_CTA}
+            className="bg-[#e01f20] font-Unageo cursor-pointer hover:bg-[#ff0000]   text-white font-bold py-[12px] px-[40px] rounded-xl shadow-2xl border-white border-2"
+          >
             Register Now
-          </button>
+          </a>
         </div>
       </div>
     </section>
