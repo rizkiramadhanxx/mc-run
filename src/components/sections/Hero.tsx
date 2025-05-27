@@ -1,3 +1,5 @@
+import { URL_CTA } from "../../constant/common";
+
 export default function HeroSection() {
   return (
     <section
@@ -5,9 +7,11 @@ export default function HeroSection() {
       // bg image
       className="relative px-2 bg-[linear-gradient(to_bottom_right,_rgba(0,0,0,0.4),_rgba(0,0,0,1)),url('/images/background-hero.jpg')] bg-cover bg-center"
     >
-      {/* <Pattern /> */}
-      <header className="grid grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
-        <div className="md:flex flex-1 hidden h-full flex-col justify-center items-start">
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#2a9031]/10  to-[#2e9430]/70 z-0 pointer-events-none" />
+
+      <header className="grid z-10 grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
+        <div className="md:flex flex-1 z-10  hidden h-full flex-col justify-center items-start">
           {/* <img
             data-aos="zoom-in"
             src="/images/run-left.png"
@@ -24,7 +28,7 @@ export default function HeroSection() {
                 alt="logo"
               />
             </div>
-            <div className="flex flex-row items-center justify-center gap-3">
+            <div className="flex flex-row items-center justify-center gap-3 z-10 ">
               <div className="flex flex-col items-center rounded-md border-2    bg-gradient-to-b from-[#1fa463] to-[#0c6b3a] shadow-[inset_0_2px_0_#ffffff,inset_-2px_0_0_#ffffff,inset_2px_0_0_#00000020,inset_0_-2px_0_#00000020] py-2 px-2 justify-center text-white">
                 <div className="flex flex-row items-center sm:space-x-2 z-10 text-center sm:text-left">
                   <h1 className="text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
@@ -41,7 +45,7 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center rounded-md border-2    bg-gradient-to-b from-[#1fa463] to-[#0c6b3a] shadow-[inset_0_2px_0_#ffffff,inset_-2px_0_0_#ffffff,inset_2px_0_0_#00000020,inset_0_-2px_0_#00000020] py-2 px-2 justify-center text-white">
+              <div className="flex flex-col items-center rounded-md border-2  z-10    bg-gradient-to-b from-[#1fa463] to-[#0c6b3a] shadow-[inset_0_2px_0_#ffffff,inset_-2px_0_0_#ffffff,inset_2px_0_0_#00000020,inset_0_-2px_0_#00000020] py-2 px-2 justify-center text-white">
                 <div className="flex flex-row items-center sm:space-x-2 z-10 text-center sm:text-left">
                   <h1 className="text-[60px] font-Anton italic drop-shadow-[6px_6px_0px_rgba(0,0,0,0.4)] leading-none">
                     2,9K
@@ -58,12 +62,12 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center z-10 ">
               <div className="font-Anton text-2xl italic px-2 py-1 bg-gradient-to-b from-white/100 to-white/5 text-[#084438]">
                 SAVE THE DATE
               </div>
             </div>
-            <div className="flex gap-5 items-center mt-4">
+            <div className="flex gap-5 items-center mt-4 z-10 ">
               <div className="flex flex-row items-center gap-3">
                 <div className="font-Anton text-6xl md:text-8xl text-white">
                   31
@@ -80,10 +84,13 @@ export default function HeroSection() {
                 SLAWI
               </div>
             </div>
-            <div className="flex justify-center">
-              <div className="font-Anton text-2xl italic px-2 py-1 rounded-md bg-white text-[#084438]">
+            <div className="flex justify-center z-10">
+              <a
+                href={URL_CTA}
+                className="font-Anton text-2xl italic px-2 py-1 rounded-md bg-white text-[#084438]"
+              >
                 DAFTAR SEKARANG
-              </div>
+              </a>
             </div>
           </div>
         </div>

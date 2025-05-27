@@ -1,68 +1,67 @@
-import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const controls = useAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      setScrolled(offset > 10); // threshold to trigger solid background
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    controls.start({
-      backgroundColor: scrolled ? "#006937" : "rgba(0, 0, 0, 0)",
-      color: scrolled ? "#ffffff" : "#ffffff",
-      transition: { duration: 0.3 },
-    });
-  }, [scrolled, controls]);
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <motion.nav
-      animate={controls}
-      className="z-20 text-xl  items-center sm:gap-4 fixed w-full py-[15px] md:py-[20px] top-0 flex justify-between lg:justify-center px-3 lg:px-12 font-semibold "
+    <nav
+      className={`z-20 text-xl items-center sm:gap-4 fixed w-full py-[15px] md:py-[20px] top-0 flex justify-between lg:justify-center px-3 lg:px-12 font-semibold transition-all duration-300 ${
+        scrolled ? "bg-[#006937] text-white" : "bg-transparent text-white"
+      }`}
     >
-      <a
-        href="#home"
+      <button
+        onClick={() => scrollToId("home")}
         aria-label="Beranda"
-        className="hover:text-white hidden lg:block  hover:bg-[#006937] px-3 py-1 rounded-xl transition"
+        className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
         Home
-      </a>
-      <a
-        href="#about"
+      </button>
+      <button
+        onClick={() => scrollToId("mission")}
         aria-label="Tentang"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
         Our Mission
-      </a>
-      <a
-        href="#about"
-        aria-label="Tentang"
+      </button>
+      <button
+        onClick={() => scrollToId("route")}
+        aria-label="Rute"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
         Route
-      </a>
-      <a
-        href="#activity"
-        aria-label="Aktivitas"
+      </button>
+      <button
+        onClick={() => scrollToId("benefit")}
+        aria-label="Manfaat"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
         Benefit
-      </a>
-      <a
-        href="#testimony"
-        aria-label="Testimoni"
+      </button>
+      <button
+        onClick={() => scrollToId("register")}
+        aria-label="Registrasi"
         className="hover:text-white hidden lg:block hover:bg-[#006937] px-3 py-1 rounded-xl transition"
       >
         Registrasi
-      </a>
+      </button>
+
       <img
         data-aos="zoom-in"
         src="https://run.alfamart.co.id/static/images/logo_alfamartrun.png"
@@ -70,6 +69,6 @@ export default function Navbar() {
         className="h-[30px] lg:hidden"
       />
       <RxHamburgerMenu className="lg:hidden" />
-    </motion.nav>
+    </nav>
   );
 }
