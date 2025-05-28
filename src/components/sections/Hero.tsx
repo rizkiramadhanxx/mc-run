@@ -11,21 +11,28 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#2a9031]/10  to-[#2e9430]/70 z-0 pointer-events-none" />
 
       <header className="grid max-w-[1500px] z-10 grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
-        <div className="md:flex flex-1 z-10  hidden h-full flex-col justify-center items-start">
-          {/* <img
+        <div className="xl:flex flex-1 relative hidden h-full flex-col justify-center items-center">
+          <div className="absolute z-10 bottom-[10%]">
+            <img
+              src="/images/keren.png"
+              className="max-w-[150px] md:max-w-[500px]"
+              alt="keren"
+            />
+          </div>
+          <img
             data-aos="zoom-in"
-            src="/images/run-left.png"
-            className="w-full"
+            src="/images/hero-left.png"
+            className="h-[100vh] mt-[100px] z-[0] object-cover"
             alt="logo"
-          /> */}
+          />
         </div>
         <div className="flex h-full flex-col justify-center items-center gap-4 ">
           <div data-aos="fade-up" className="flex flex-col  gap-3 mt-4 sm:mt-8">
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
               <img
                 src="/images/logo-white.png"
                 className="max-w-[150px] md:max-w-[300px]"
-                alt="logo"
+                alt="banner"
               />
             </div>
             <div className="flex flex-row items-center justify-center gap-3 z-10 ">
