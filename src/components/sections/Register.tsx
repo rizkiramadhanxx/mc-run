@@ -9,15 +9,18 @@ export default function RegisterSection() {
       }}
       className="pt-12 pb-12 z-10 flex  justify-center md:px-[150px] sm:px-12 px-6"
     >
-      <div data-aos="fade-right " className="flex w-full flex-col">
+      <div
+        data-aos="fade-right max-w-[1500px]"
+        className="flex w-full flex-col"
+      >
         {/* Left Text */}
         <div className="justify-center fade-right flex">
-          <h2 className="xl:text-6xl font-Anton text-2xl  text-white italic">
+          <h2 className="xl:text-6xl z-10  font-Anton text-2xl  text-white italic">
             Registrasi
           </h2>
         </div>
         <div className="justify-center fade-right flex">
-          <h3 className="mt-[12px] text-4xl font-Anton text-white italic">
+          <h3 className="mt-[12px] z-10  text-4xl font-Anton text-white italic">
             Early Bird
           </h3>
         </div>

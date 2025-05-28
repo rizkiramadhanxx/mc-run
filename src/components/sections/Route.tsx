@@ -85,7 +85,10 @@ export default function RoutesSection() {
         id="route"
         className="pt-12 -z-0 flex bg-[#309c2d] justify-center md:px-[80px] sm:px-12 px-6"
       >
-        <div data-aos="fade-right" className="flex w-full flex-col">
+        <div
+          data-aos="fade-right"
+          className="flex max-w-[1500px] w-full flex-col"
+        >
           {/* Left Text */}
           <div className="justify-center fade-right flex">
             <h2 className=" z-10 text-3xl lg:text-5xl font-Anton italic text-center mb-6 text-white">
@@ -135,13 +138,13 @@ export default function RoutesSection() {
         </div>
       </section>
       <div
-        className="relative p-[20px] md:p-[100px] bg-cover bg-center"
+        className="relative  pb-[100px] pt-[200px] px-[20px] md:px-[100px] bg-cover bg-center"
         id="benefit"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#309c2d] to-green-300/10 z-0" />
-        <div className="absolute inset-0 bg-[url('/images/background-hero.jpg')] bg-cover bg-center z-[-1]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#309c2d] to-green-300/20 z-0" />
+        <div className="absolute inset-0 bg-[url('/images/mc-run.jpg')] bg-cover bg-center z-[-1]" />
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-white">
+        <div className="relative z-10 max-w-[1500px]  flex flex-col items-center justify-center text-white">
           <div className="text-3xl lg:text-5xl font-Anton italic text-center">
             What makes our run special?
           </div>
@@ -150,7 +153,7 @@ export default function RoutesSection() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full lg:w-[90%] mt-10 mx-auto bg-white p-5 rounded-xl shadow-2xl">
+        <div className="relative max-w-[1500px]  z-10 w-full lg:w-[90%] mt-10 mx-auto bg-white p-5 rounded-xl shadow-2xl">
           <Slider {...settings}>
             {dataSlider.map((item, index) => (
               <div key={index}>
