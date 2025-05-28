@@ -6,7 +6,7 @@ export default function AboutSection() {
     >
       <div
         data-aos="fade-right"
-        className="grid grid-cols-1 lg:grid-cols-[2fr_5fr] gap-12 items-center"
+        className="grid grid-cols-1  max-w-[1500px] lg:grid-cols-[2fr_5fr] gap-12 items-center"
       >
         <div data-aos="fade-left" className="flex  justify-center">
           <img

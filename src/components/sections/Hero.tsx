@@ -10,7 +10,7 @@ export default function HeroSection() {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#2a9031]/10  to-[#2e9430]/70 z-0 pointer-events-none" />
 
-      <header className="grid z-10 grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
+      <header className="grid max-w-[1500px] z-10 grid-cols-1 xl:grid-cols-2 pt-[150px] xl:pt-0 xl:mx-[150px] pb-5 items-center md:min-h-svh  mx-auto  gap-y-4 gap-x-2">
         <div className="md:flex flex-1 z-10  hidden h-full flex-col justify-center items-start">
           {/* <img
             data-aos="zoom-in"
@@ -67,7 +67,7 @@ export default function HeroSection() {
                 SAVE THE DATE
               </div>
             </div>
-            <div className="flex gap-5 items-center mt-4 z-10 ">
+            <div className="flex gap-5 items-center justify-center mt-4 z-10 ">
               <div className="flex flex-row items-center gap-3">
                 <div className="font-Anton text-6xl md:text-8xl text-white">
                   31
