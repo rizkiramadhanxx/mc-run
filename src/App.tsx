@@ -7,13 +7,13 @@ import useElementPosition from "./hooks/useElementPosition";
 
 function App() {
   const [refHero, { bottom: bottomHero }] =
-    useElementPosition<HTMLDivElement>();
+    useElementPosition < HTMLDivElement > ();
 
   const [refAbout, { bottom: bottomAbout }] =
-    useElementPosition<HTMLDivElement>();
+    useElementPosition < HTMLDivElement > ();
 
   const [refRegister, { top: topRegister }] =
-    useElementPosition<HTMLDivElement>();
+    useElementPosition < HTMLDivElement > ();
   return (
     <>
       <main>
