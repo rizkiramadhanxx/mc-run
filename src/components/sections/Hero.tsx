@@ -94,6 +94,7 @@ export default function HeroSection() {
             <div className="flex justify-center z-10">
               <a
                 href={URL_CTA}
+                target="_blank"
                 className="font-Anton text-2xl italic px-2 py-1 rounded-md bg-white text-[#084438]"
               >
                 DAFTAR SEKARANG
