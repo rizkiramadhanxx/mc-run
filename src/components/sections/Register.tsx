@@ -70,6 +70,7 @@ export default function RegisterSection() {
         <div className="flex justify-center">
           <a
             href={URL_CTA}
+            target="_blank"
             className="bg-[#e01f20] font-Unageo cursor-pointer hover:bg-[#ff0000]   text-white font-bold py-[12px] px-[40px] rounded-xl shadow-2xl border-white border-2"
           >
             Register Now
