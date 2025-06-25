@@ -2,6 +2,8 @@ import Navbar from "./components/layout/Navbar";
 import AboutSection from "./components/sections/About";
 import HeroSection from "./components/sections/Hero";
 import RegisterSection from "./components/sections/Register";
+import SponsorSection from "./components/sections/Sponsor";
+import FooterSection from "./components/sections/Footer";
 import RoutesSection from "./components/sections/Route";
 import useElementPosition from "./hooks/useElementPosition";
 
@@ -14,6 +16,13 @@ function App() {
 
   const [refRegister, { top: topRegister }] =
     useElementPosition < HTMLDivElement > ();
+
+  const [refSponsor,] =
+    useElementPosition < HTMLDivElement > ();
+
+  const [refFooter] =
+    useElementPosition < HTMLDivElement > ();
+
   return (
     <>
       <main>
@@ -64,6 +73,12 @@ function App() {
           <div ref={refRegister}>
             <RegisterSection />
           </div>
+          <div ref={refSponsor}>
+            <SponsorSection />
+          </div>
+          <div ref={refFooter}>
+            <FooterSection />
+          </div>           
         </div>
       </main>
     </>
