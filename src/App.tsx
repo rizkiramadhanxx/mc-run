@@ -17,10 +17,10 @@ function App() {
   const [refRegister, { top: topRegister }] =
     useElementPosition < HTMLDivElement > ();
 
-  const [refSponsor, { top: topSponsor }] =
+  const [refSponsor,] =
     useElementPosition < HTMLDivElement > ();
 
-  const [refFooter, { top: topFooter }] =
+  const [refFooter] =
     useElementPosition < HTMLDivElement > ();
 
   return (
