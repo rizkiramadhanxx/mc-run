@@ -31,10 +31,10 @@ export default function FooterSection() {
               Contact Us:
             </p>
             <p>
-              <FontAwesomeIcon icon={faWhatsapp} size='lg'/> 0822-2099-5243
+              <FontAwesomeIcon icon={faWhatsapp} size='xl'/> 0822-2099-5243
             </p>
             <p>
-              <FontAwesomeIcon icon={faInstagram} size='lg'/> @mutiaracahaya.official &nbsp; @mcrun &nbsp; @tegalcityrun
+              <FontAwesomeIcon icon={faInstagram} size='xl'/> @mutiaracahaya.official &nbsp; @mcrun &nbsp; @tegalcityrun
             </p>
           </div>          
         </div>
