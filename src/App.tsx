@@ -6,6 +6,8 @@ import SponsorSection from "./components/sections/Sponsor";
 import FooterSection from "./components/sections/Footer";
 import RoutesSection from "./components/sections/Route";
 import useElementPosition from "./hooks/useElementPosition";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import BibChecker from "./page/BibChecker";
 
 function App() {
   const [refHero, { bottom: bottomHero }] =
@@ -22,6 +24,13 @@ function App() {
 
   const [refFooter] =
     useElementPosition < HTMLDivElement > ();
+
+  const router = createBrowserRouter([
+    {
+      path: "/bibchecker",
+      element: <BibChecker/>
+    }
+  ])
 
   return (
     <>
@@ -81,6 +90,7 @@ function App() {
           </div>           
         </div>
       </main>
+      <RouterProvider router={router}/>
     </>
   );
 }
