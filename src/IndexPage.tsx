@@ -6,10 +6,10 @@ import SponsorSection from "./components/sections/Sponsor";
 import FooterSection from "./components/sections/Footer";
 import RoutesSection from "./components/sections/Route";
 import useElementPosition from "./hooks/useElementPosition";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import BibChecker from "./page/BibChecker";
+// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+// import BibChecker from "./page/BibChecker";
 
-function Index() {
+function IndexPage() {
   const [refHero, { bottom: bottomHero }] =
     useElementPosition < HTMLDivElement > ();
 
@@ -25,12 +25,12 @@ function Index() {
   const [refFooter] =
     useElementPosition < HTMLDivElement > ();
 
-  const router = createBrowserRouter([
-    {
-      path: "/bibchecker",
-      element: <BibChecker/>
-    }
-  ])
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/bibchecker",
+  //     element: <BibChecker/>
+  //   }
+  // ])
 
   return (
     <>
@@ -90,9 +90,9 @@ function Index() {
           </div>           
         </div>
       </main>
-      <RouterProvider router={router}/>
+      {/* <RouterProvider router={router}/> */}
     </>
   );
 }
 
-export default App;
+export default IndexPage;

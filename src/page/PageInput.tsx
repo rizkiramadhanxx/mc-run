@@ -1,9 +1,9 @@
-// PageBibChecker.tsx
+// PageInput.tsx
 import React, { useState } from 'react';
-import BibCheckerForm from '../components/bib/BibChecker';
+import RunnerForm from '../components/bib/RunnerForm';
 import type { Runner } from '../utils/api';
 
-const BibChecker: React.FC = () => {
+const PageInput: React.FC = () => {
   const [notification, setNotification] = useState<{
     type: 'success' | 'error';
     message: string;
@@ -12,7 +12,7 @@ const BibChecker: React.FC = () => {
   const handleSuccess = (data: Runner) => {
     setNotification({
       type: 'success',
-      message: `Bib "${data.bib}" berhasil di-scan untuk pelari "${data.name}"`,
+      message: `Pelari "${data.name}" berhasil didaftarkan dengan ID: ${data.id}`,
     });
     
     // Auto hide notification after 5 seconds
@@ -24,7 +24,7 @@ const BibChecker: React.FC = () => {
   const handleError = (error: string) => {
     setNotification({
       type: 'error',
-      message: `Gagal melakukan scan bib: ${error}`,
+      message: `Gagal mendaftarkan pelari: ${error}`,
     });
     
     // Auto hide notification after 5 seconds
@@ -42,10 +42,10 @@ const BibChecker: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Sistem Scan Bib Pelari
+            Sistem Pendaftaran Pelari
           </h1>
           <p className="text-gray-600">
-            Scan bib number untuk mencatat waktu kedatangan pelari
+            Daftarkan pelari untuk event lari yang akan datang
           </p>
         </div>
 
@@ -88,7 +88,7 @@ const BibChecker: React.FC = () => {
         )}
 
         {/* Form */}
-        <BibCheckerForm onSuccess={handleSuccess} onError={handleError} />
+        <RunnerForm onSuccess={handleSuccess} onError={handleError} />
 
         {/* Instructions */}
         <div className="max-w-md mx-auto mt-8 p-4 bg-blue-50 rounded-lg">
@@ -96,36 +96,10 @@ const BibChecker: React.FC = () => {
             Petunjuk Penggunaan:
           </h3>
           <ul className="text-sm text-blue-700 space-y-1">
-            <li>• <strong>Mode Auto-scan:</strong> Scan barcode akan otomatis submit</li>
-            <li>• <strong>Mode Manual:</strong> Ketik nomor bib dan tekan Enter</li>
-            <li>• Sistem akan otomatis mencatat waktu scan</li>
-            <li>• Pastikan nomor bib sudah terdaftar di sistem</li>
-            <li>• Input akan otomatis focus setelah scan selesai</li>
-          </ul>
-        </div>
-
-        {/* Scanner Settings */}
-        <div className="max-w-md mx-auto mt-4 p-4 bg-green-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-green-800 mb-2">
-            Pengaturan Barcode Scanner:
-          </h3>
-          <ul className="text-sm text-green-700 space-y-1">
-            <li>• Set scanner ke mode <strong>Keyboard Wedge</strong></li>
-            <li>• Aktifkan <strong>Auto-Enter</strong> di scanner (opsional)</li>
-            <li>• Atau gunakan mode Auto-scan di aplikasi</li>
-            <li>• Delay auto-submit: 100ms setelah input selesai</li>
-          </ul>
-        </div>
-
-        {/* Status Information */}
-        <div className="max-w-md mx-auto mt-4 p-4 bg-yellow-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-yellow-800 mb-2">
-            Informasi Status:
-          </h3>
-          <ul className="text-sm text-yellow-700 space-y-1">
-            <li>• <span className="font-semibold">Success:</span> Bib berhasil di-scan</li>
-            <li>• <span className="font-semibold">Error:</span> Bib tidak ditemukan atau sudah di-scan</li>
-            <li>• Waktu scan akan tercatat otomatis</li>
+            <li>• Nama pelari wajib diisi</li>
+            <li>• Pilih jenis lari yang sesuai</li>
+            <li>• Tanggal scan otomatis terisi dengan waktu sekarang</li>
+            <li>• Klik "Daftar Pelari" untuk menyimpan data</li>
           </ul>
         </div>
       </div>
@@ -133,4 +107,4 @@ const BibChecker: React.FC = () => {
   );
 };
 
-export default BibChecker;
+export default PageInput;
