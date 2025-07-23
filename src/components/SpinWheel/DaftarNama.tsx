@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useDataStore from "../../store/useDataStore";
 
 export default function DaftarNama() {

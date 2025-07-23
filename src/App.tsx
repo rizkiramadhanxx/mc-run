@@ -3,7 +3,7 @@ import BibPage from "./page/BibPage";
 import IndexPage from './IndexPage';
 import PageInput from './page/PageInput';
 import TabelPelari from './page/TabelPelari';
-import BibChecker from './page/BibChecker';
+//import BibChecker from './page/BibChecker';
 import SpinWheelPage from './page/SpinWheelPage';
 
 function App () {

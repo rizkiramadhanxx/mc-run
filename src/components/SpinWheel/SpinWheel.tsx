@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import useDataStore from '../../store/useDataStore';
 
 interface SpinWheelProps {
-  items: string[];
   onSpinEnd: (selectedItem: string) => void;
 }
 
-const SpinWheel: React.FC<SpinWheelProps> = ({ items, onSpinEnd }) => {
+const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   // durasi spin------------------------------------------------------
   const {duration, setDuration} = useDataStore();
@@ -16,9 +15,21 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ items, onSpinEnd }) => {
   // Daftar Nama-------------------------------------------------------
   const { name, setName, removeName } = useDataStore();
   const [newInputName, setNewInputName] = useState('');
+
+  const [spinning, setSpinning] = useState(false);
+  const [totalRotation, setTotalRotation] = useState(0);
+  const [selectedItem, setSelectedItem] = useState('');
+  const [modalSettingsOpen, setModalSettingsOpen] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+
+  const numNames = name.length;
+  const segmentAngle = 360 / Math.max(1, numNames);
   const handleAddName = () => {
-    setName(newInputName);
-    setNewInputName('');
+    const trimmedName = newInputName.trim();
+    if (trimmedName && !name.includes(trimmedName)) {
+      setName(trimmedName);
+      setNewInputName('');
+    }
   };
 
   const handleRemoveName = (index: number) => {
@@ -27,68 +38,77 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ items, onSpinEnd }) => {
   // Daftar Nama-------------------------------------------------------
 
 
-  const [spinning, setSpinning] = useState(false);
-  const [rotation, setRotation] = useState(0);
-  const [selectedItem, setSelectedItem] = useState('');
-  const [modalSettingsOpen, setModalSettingsOpen] = useState(false);
-
   const handleSettingsClick = () => {
     setModalSettingsOpen(true);
   };
 
-  const numItems = items.length;
-  const segmentAngle = 360 / numItems;
-
+  
   const handleSpin = () => {
-    if (spinning) return;
+    if (spinning || numNames === 0) return;
 
     setSpinning(true);
     const minRotations = 5;
     const maxRotations = 10;
     const randomRotations = Math.floor(Math.random() * (maxRotations - minRotations + 1)) + minRotations;
+    const randomIndex = Math.floor(Math.random() * numNames);
+    const extraRotation = 360 * randomRotations + (360 - (randomIndex * segmentAngle + segmentAngle / 2));
 
-    const randomIndex = Math.floor(Math.random() * numItems);
-    const targetAngle = 360 * randomRotations + (360 - (randomIndex * segmentAngle + segmentAngle / 2));
-
-    setRotation(targetAngle);
+    const maxRotation = 10000;
+    const newRotation = totalRotation + extraRotation;
+    if (newRotation > maxRotation) {
+      setTotalRotation(newRotation % 360);
+    } else (
+      setTotalRotation(newRotation)
+    )
+    // setTotalRotation(newRotation);
 
     setTimeout(() => {
       setSpinning(false);
-      const finalIndex = (numItems - 1 - randomIndex + numItems) % numItems;
-      setSelectedItem(items[finalIndex]);
-      onSpinEnd(items[finalIndex]);
+
+      const finaleAngle = (totalRotation + extraRotation) % 360;
+      const normalizedAngle = (360 - finaleAngle + segmentAngle / 2) % 360;
+      const finalIndex = Math.floor(normalizedAngle / segmentAngle) % numNames;
+      
+      setSelectedItem(name[finalIndex]);
+      onSpinEnd(name[finalIndex]);
+
+      setShowNotification(true); // Tampilkan notifikasi
+  
+      // Sembunyikan notifikasi setelah 5 detik
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 5000);
     }, duration * 1000);
   };
 
   useEffect(() => {
     setSelectedItem('');
-  }, [items]);
+  }, [name]);
 
   // Generate colors for segments
   const getSegmentColor = (index: number) => {
-    const hue = (index * (360 / numItems)) % 360;
+    const hue = (index * (360 / numNames)) % 360;
     return `hsl(${hue}, 70%, 50%)`;
   };
 
   return (
     <div className="grid grid-cols-2 items-center justify-items-center margin-auto gap-10 bg-gray-100 min-h-screen">
       <div className="relative w-96 h-96 mx-auto">
-        {/* Pointer */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0
-          border-l-[15px] border-l-transparent
-          border-r-[15px] border-r-transparent
-          border-b-[30px] border-b-red-500 z-20"></div>
+        
 
         {/* Wheel Container */}
         <div onClick={handleSettingsClick} className='hover:cursor-pointer'>
           setting
         </div>
         <div
-          className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform duration-[10000ms] ease-out overflow-hidden`}
-          style={{ transform: `rotate(${rotation}deg)` }}
+          className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform ease-out overflow-hidden`}
+          style={{ 
+            transform: `rotate(${totalRotation}deg)`,
+            transitionDuration: `${duration}s`
+          }}
         >
           <svg className="w-full h-full" viewBox="0 0 200 200">
-            {items.map((item, index) => {
+            {numNames > 0 ? name.map((item, index) => {
               const startAngle = (index * segmentAngle - 90) * (Math.PI / 180);
               const endAngle = ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
               
@@ -133,26 +153,44 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ items, onSpinEnd }) => {
                   </text>
                 </g>
               );
-            })}
+            }) : (
+              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="#999">
+                Tidak ada nama
+              </text>
+            )
+            }
           </svg>
         </div>
 
         {/* Center Circle */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-gray-300 z-10"></div>
 
-        <button
-          onClick={handleSpin}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-10"
-          disabled={spinning}
-        >
-          {spinning ? 'Memutar...' : 'Putar Roda!'}
-        </button>
+        {/* Pointer */}
+        <div className="absolute top-8 justify-start left-1/2 -translate-x-1/2 w-0 h-0
+          border-t-[30px] border-b-red-500 z-20
+          border-l-[15px] border-l-transparent
+          border-r-[15px] border-r-transparent
+          ">
+        </div>
 
-        {selectedItem && !spinning && (
-          <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 text-2xl font-bold text-green-700 text-center">
-            Selamat! Anda mendapatkan: {selectedItem}
-          </div>
-        )}
+        {
+          showNotification && !spinning && (
+            <div className="fixed top-10 left-0 w-full h-2/4 flex items-center justify-center z-50 text-red-500 text-3xl">
+              Selamat! Kepada: {selectedItem}
+            </div>
+          )
+        }
+
+
+        <div className='mt-4'>
+          <button
+            onClick={handleSpin}
+            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-10"
+            disabled={spinning || name.length === 0}
+          >
+            {spinning ? 'Memutar...' : 'Putar Roda!'}
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col mt-8 text-center">

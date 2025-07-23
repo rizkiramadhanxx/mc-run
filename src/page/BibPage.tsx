@@ -1,7 +1,6 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getLastScannerRunner } from '../utils/api';
 import type { Runner } from '../utils/api';
+import { getLastScannerRunner } from '../utils/api';
 
 function BibPage() {
 
