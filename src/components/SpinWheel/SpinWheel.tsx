@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useDataStore from '../../store/useDataStore';
 
 interface SpinWheelProps {
@@ -9,7 +9,6 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   // durasi spin------------------------------------------------------
   const {duration, setDuration} = useDataStore();
-
   // durasi spin------------------------------------------------------
   
   // Daftar Nama-------------------------------------------------------
@@ -18,9 +17,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   const [spinning, setSpinning] = useState(false);
   const [totalRotation, setTotalRotation] = useState(0);
-  const [selectedItem, setSelectedItem] = useState('');
   const [modalSettingsOpen, setModalSettingsOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
 
   const numNames = name.length;
   const segmentAngle = 360 / Math.max(1, numNames);
@@ -66,24 +63,15 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
       setSpinning(false);
 
       const finaleAngle = (totalRotation + extraRotation) % 360;
-      const normalizedAngle = (360 - finaleAngle + segmentAngle / 2) % 360;
+      // const normalizedAngle = (360 - finaleAngle + segmentAngle / 2) % 360;
+      // const finalIndex = Math.floor(normalizedAngle / segmentAngle) % numNames;
+      const normalizedAngle = (360 - finaleAngle) % 360;
       const finalIndex = Math.floor(normalizedAngle / segmentAngle) % numNames;
       
-      setSelectedItem(name[finalIndex]);
       onSpinEnd(name[finalIndex]);
 
-      setShowNotification(true); // Tampilkan notifikasi
-  
-      // Sembunyikan notifikasi setelah 5 detik
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 5000);
     }, duration * 1000);
   };
-
-  useEffect(() => {
-    setSelectedItem('');
-  }, [name]);
 
   // Generate colors for segments
   const getSegmentColor = (index: number) => {
@@ -92,13 +80,19 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 items-center justify-items-center margin-auto gap-10 bg-gray-100 min-h-screen">
-      <div className="relative w-96 h-96 mx-auto">
+    <div className="grid grid-cols-3 items-center justify-items-center margin-auto"
+    >
+      <div className='colspan-1 justify-items-center' style={{ maxHeight: '100vh' }}>
+        <img className='absolute top-15 left-55 w-[8%]' src="images/footer/logo-mc.png" alt="" />
+        <img className='absolute top-15 left-80 w-[6%]' src="images/spinwheel/logo-anniversary.png" alt="" />
+        <img className='absolute top-10 left-0 w-[45%]' src="images/spinwheel/left-image.png" alt=""/>
+      </div>
+      
+      <div className="absolute w-110 h-110 top-20 right-85">
         
-
         {/* Wheel Container */}
-        <div onClick={handleSettingsClick} className='hover:cursor-pointer'>
-          setting
+        <div onClick={handleSettingsClick} className='hover:cursor-pointer text-1xl font-bold text-[#006937] p-0.5 bg-white rounded-full absolute top-0 left-0'>
+          Setting
         </div>
         <div
           className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform ease-out overflow-hidden`}
@@ -166,20 +160,20 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-gray-300 z-10"></div>
 
         {/* Pointer */}
-        <div className="absolute top-8 justify-start left-1/2 -translate-x-1/2 w-0 h-0
+        <div className="absolute top-6 justify-start left-1/2 -translate-x-1/2 w-0 h-0
           border-t-[30px] border-b-red-500 z-20
           border-l-[15px] border-l-transparent
           border-r-[15px] border-r-transparent
           ">
         </div>
 
-        {
+        {/* {
           showNotification && !spinning && (
             <div className="fixed top-10 left-0 w-full h-2/4 flex items-center justify-center z-50 text-red-500 text-3xl">
               Selamat! Kepada: {selectedItem}
             </div>
           )
-        }
+        } */}
 
 
         <div className='mt-4'>
@@ -191,38 +185,17 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
             {spinning ? 'Memutar...' : 'Putar Roda!'}
           </button>
         </div>
+        
+      </div>
+      <div className='span-1'>
+        <img className='absolute top-20 right-30 w-[20%]' src="images/spinwheel/logo-spinwheel.png" alt="" />
+        <img className='absolute bottom-0 right-20 w-[25%]' src="images/spinwheel/model.png" alt="" />
       </div>
 
-      <div className="flex flex-col mt-8 text-center">
-        <h3 className="text-lg font-semibold mb-4">Daftar Nama</h3>
-        <div className="flex flex-wrap gap-2 justify-center">
-          {name.map((item, index) => (
-            // Pastikan untuk memberikan key unik untuk setiap elemen dalam list
-            <p key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-              {item} <span onClick={() => handleRemoveName(index)} className="text-red-500 hover:text-red-600 hover:cursor-pointer">x</span>
-            </p>
-          ))}
-        </div>
-        <div className="mt-4 space-x-2">
-          <input
-            type="text"
-            value={newInputName}
-            onChange={(e) => setNewInputName(e.target.value)}
-            className="px-3 py-1 border rounded text-center"
-            placeholder="Masukkan Nama"
-          />
-          <button
-            onClick={handleAddName}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          >
-            Tambah
-          </button>
-        </div>
-      </div>
 
       {modalSettingsOpen && <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white p-4 rounded">
-          <h2 className="text-lg font-semibold mb-4">Setting Waktu</h2>
+        <div className="w-1/2 bg-white p-4 rounded">
+          <h1 className="text-2xl font-semibold mb-4">Settings</h1>
           <div className="flex items-center mb-4">
             <label className="mr-2">Waktu Putar (detik):</label>
             <input
@@ -232,11 +205,53 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
               className="px-2 py-1 border rounded"
             />
           </div>
+
+          {/* Daftar Nama */}
+          <h3 className="text-lg font-semibold mb-4">Daftar Nama</h3>
+          <div className='overflow-x-auto'>
+            <div className="flex gap-2 justify-start w-1">
+              {name.map((item, index) => (
+                // Pastikan untuk memberikan key unik untuk setiap elemen dalam list
+                <div className='flex flex-row justify-items-center'>
+                  <p key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                    {item} 
+                  </p>
+                  <p className="text-red-500 hover:text-red-600 hover:cursor-pointer" onClick={() => handleRemoveName(index)}>
+                    x
+                  </p>
+                </div>
+                
+              ))}
+            </div>
+          </div>
+            
+          <div className="mt-4 space-x-2">
+            <input
+              type="text"
+              value={newInputName}
+              onChange={(e) => setNewInputName(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleAddName();
+                }
+              }}
+              className="px-3 py-1 border rounded text-center"
+              placeholder="Masukkan Nama"
+            />
+            <button
+              onClick={handleAddName}
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            >
+              Tambah
+            </button>
+          </div>
+          {/* Datar Nama */}
+          
           <button
             onClick={() => setModalSettingsOpen(false)}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mt-10"
           >
-            Simpan
+            Close
           </button>
         </div>
       </div>}
