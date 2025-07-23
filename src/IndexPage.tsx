@@ -6,24 +6,20 @@ import SponsorSection from "./components/sections/Sponsor";
 import FooterSection from "./components/sections/Footer";
 import RoutesSection from "./components/sections/Route";
 import useElementPosition from "./hooks/useElementPosition";
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import BibChecker from "./page/BibChecker";
 
 function IndexPage() {
   const [refHero, { bottom: bottomHero }] =
-    useElementPosition < HTMLDivElement > ();
+    useElementPosition<HTMLDivElement>();
 
   const [refAbout, { bottom: bottomAbout }] =
-    useElementPosition < HTMLDivElement > ();
+    useElementPosition<HTMLDivElement>();
 
   const [refRegister, { top: topRegister }] =
-    useElementPosition < HTMLDivElement > ();
+    useElementPosition<HTMLDivElement>();
 
-  const [refSponsor,] =
-    useElementPosition < HTMLDivElement > ();
+  const [refSponsor] = useElementPosition<HTMLDivElement>();
 
-  const [refFooter] =
-    useElementPosition < HTMLDivElement > ();
+  const [refFooter] = useElementPosition<HTMLDivElement>();
 
   // const router = createBrowserRouter([
   //   {
@@ -87,7 +83,7 @@ function IndexPage() {
           </div>
           <div ref={refFooter}>
             <FooterSection />
-          </div>           
+          </div>
         </div>
       </main>
       {/* <RouterProvider router={router}/> */}
