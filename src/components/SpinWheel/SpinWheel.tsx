@@ -84,13 +84,13 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   return (
     <div className="items-center justify-items-center margin-auto h-[100vh] w-full"
     >
-      <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[30%] xl:w-[30%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-40%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
+      <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[30%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-30%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
         <div className='flex items-center justify-center md:w-[70%] lg:w-[90%] w-full'>
             <img className='h-auto max-x-[20%] max-w-[20%]' src="images/spinwheel/logo-mc.png" alt="" />
             <img className='h-auto ml-2 max-w-[20%]' src="images/spinwheel/logo-anniversary.png" alt="" />
         </div>
         <div className='flex justify-center w-full'>
-          <img className='md:w-[75%] lg:w-[95%] xl:w-[90%]' src="images/spinwheel/left-image.png" alt=""/>
+          <img className='md:w-[75%] lg:w-[100%] xl:w-[90%]' src="images/spinwheel/left-image.png" alt=""/>
         </div>
       </div>
       
