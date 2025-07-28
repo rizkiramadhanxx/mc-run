@@ -48,15 +48,17 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     const maxRotations = 10;
     const randomRotations = Math.floor(Math.random() * (maxRotations - minRotations + 1)) + minRotations;
     const randomIndex = Math.floor(Math.random() * numNames);
-    const extraRotation = 360 * randomRotations + (360 - (randomIndex * segmentAngle + segmentAngle / 2));
+    const offsetAngle = segmentAngle * 0.25 + (Math.random() * segmentAngle * 0.5);
+    const extraRotation = 360 * randomRotations + (360 - (randomIndex * segmentAngle + offsetAngle));
 
     const maxRotation = 10000;
     const newRotation = totalRotation + extraRotation;
     if (newRotation > maxRotation) {
       setTotalRotation(newRotation % 360);
-    } else (
-      setTotalRotation(newRotation)
-    )
+    } else {
+      setTotalRotation(newRotation);
+    }
+      
     // setTotalRotation(newRotation);
 
     setTimeout(() => {
@@ -80,20 +82,19 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   };
 
   return (
-    <div className="grid grid-cols-3 items-center justify-items-center margin-auto"
+    <div className="items-center justify-items-center margin-auto h-[100vh] w-full"
     >
-      <div className='colspan-1 justify-items-center' style={{ maxHeight: '100vh' }}>
-        <img className='absolute top-15 left-55 w-[8%]' src="images/footer/logo-mc.png" alt="" />
-        <img className='absolute top-15 left-80 w-[6%]' src="images/spinwheel/logo-anniversary.png" alt="" />
-        <img className='absolute top-10 left-0 w-[45%]' src="images/spinwheel/left-image.png" alt=""/>
+      <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[30%] xl:w-[30%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-40%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
+        <div className='flex items-center justify-center md:w-[70%] lg:w-[90%] w-full'>
+            <img className='h-auto max-x-[20%] max-w-[20%]' src="images/spinwheel/logo-mc.png" alt="" />
+            <img className='h-auto ml-2 max-w-[20%]' src="images/spinwheel/logo-anniversary.png" alt="" />
+        </div>
+        <div className='flex justify-center w-full'>
+          <img className='md:w-[75%] lg:w-[95%] xl:w-[90%]' src="images/spinwheel/left-image.png" alt=""/>
+        </div>
       </div>
       
-      <div className="absolute w-110 h-110 top-20 right-85">
-        
-        {/* Wheel Container */}
-        <div onClick={handleSettingsClick} className='hover:cursor-pointer text-1xl font-bold text-[#006937] p-0.5 bg-white rounded-full absolute top-0 left-0'>
-          Setting
-        </div>
+      <div className="absolute w-[30%] h-auto md:top-[20%] lg:top-[15%] md:right-35 lg:right-[25%] md:w-[40%] lg:w-[35%] xl:w-[30%]">
         <div
           className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform ease-out overflow-hidden`}
           style={{ 
@@ -102,7 +103,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
           }}
         >
           <svg className="w-full h-full" viewBox="0 0 200 200">
-            {numNames > 0 ? name.map((item, index) => {
+            {numNames > 1 ? name.map((item, index) => {
               const startAngle = (index * segmentAngle - 90) * (Math.PI / 180);
               const endAngle = ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
               
@@ -148,8 +149,8 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
                 </g>
               );
             }) : (
-              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="#999">
-                Tidak ada nama
+              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="white">
+                Masukkan nama minimal 2
               </text>
             )
             }
@@ -157,15 +158,22 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
         </div>
 
         {/* Center Circle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-gray-300 z-10"></div>
+        {
+          numNames > 1 && (
+            <div onClick={handleSpin} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-auto z-10">
+              <img src="images/spinwheel/pointer.png" alt="" />
+            </div>
+          )
+        }
+        
 
         {/* Pointer */}
-        <div className="absolute top-6 justify-start left-1/2 -translate-x-1/2 w-0 h-0
+        {/* <div className="absolute top-6 justify-start left-1/2 -translate-x-1/2 w-[6%] h-auto
           border-t-[30px] border-b-red-500 z-20
           border-l-[15px] border-l-transparent
           border-r-[15px] border-r-transparent
           ">
-        </div>
+        </div> */}
 
         {/* {
           showNotification && !spinning && (
@@ -179,8 +187,9 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
         <div className='mt-4'>
           <button
             onClick={handleSpin}
-            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-10"
-            disabled={spinning || name.length === 0}
+            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-10
+            md:text-1xl md:text-sm md:py-1 md:px-3"
+            disabled={spinning || name.length <= 1}
           >
             {spinning ? 'Memutar...' : 'Putar Roda!'}
           </button>
@@ -188,8 +197,8 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
         
       </div>
       <div className='span-1'>
-        <img className='absolute top-20 right-30 w-[20%]' src="images/spinwheel/logo-spinwheel.png" alt="" />
-        <img className='absolute bottom-0 right-20 w-[25%]' src="images/spinwheel/model.png" alt="" />
+        <img className='absolute top-20 right-30 w-[20%] md:w-[24%] lg:w-[20%] md:right-10 lg:right-20' src="images/spinwheel/logo-spinwheel.png" alt="" />
+        <img onClick={handleSettingsClick} className='absolute bottom-0 right-20 w-[28%] md:w-[25%] md:right-2' src="images/spinwheel/model.png" alt="" />
       </div>
 
 
@@ -212,8 +221,8 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
             <div className="flex gap-2 justify-start w-1">
               {name.map((item, index) => (
                 // Pastikan untuk memberikan key unik untuk setiap elemen dalam list
-                <div className='flex flex-row justify-items-center'>
-                  <p key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                <div key={index} className='flex flex-row items-center'>
+                  <p className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
                     {item} 
                   </p>
                   <p className="text-red-500 hover:text-red-600 hover:cursor-pointer" onClick={() => handleRemoveName(index)}>

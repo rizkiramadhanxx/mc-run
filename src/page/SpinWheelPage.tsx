@@ -19,7 +19,7 @@ function SpinWheelPage() {
   };
 
   return (
-      <div style={{ minHeight: '100vh', backgroundImage: `url(images/spinwheel/background.png)`, backgroundSize: "cover", backgroundPosition: "center"}}>    
+      <div style={{ backgroundImage: `url(images/spinwheel/background.png)`, backgroundSize: "cover", backgroundPosition: "center"}}>    
         <SpinWheel onSpinEnd={handleSpinEnd} />
         
         {/* {result && (
@@ -43,7 +43,6 @@ function SpinWheelPage() {
           <div className="bg-white p-8 rounded-lg shadow-xl text-center transform transition-transform duration-300 max-w-md w-full scale-100">
             <h2 className="text-2xl font-bold text-green-600 mb-4">🎉 Selamat!</h2>
             <p className="text-lg text-gray-800 mb-6">
-              Pemenangnya adalah:{' '}
               <span className="font-semibold">{selectedItem}</span>
             </p>
             <button
