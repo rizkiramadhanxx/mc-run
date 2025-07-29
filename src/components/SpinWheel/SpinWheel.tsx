@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import useDataStore from '../../store/useDataStore';
 
 interface SpinWheelProps {
@@ -18,6 +18,9 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   const [spinning, setSpinning] = useState(false);
   const [totalRotation, setTotalRotation] = useState(0);
   const [modalSettingsOpen, setModalSettingsOpen] = useState(false);
+
+  //audio spin
+  const spinAudioRef = useRef<HTMLAudioElement>(null);
 
   const numNames = name.length;
   const segmentAngle = 360 / Math.max(1, numNames);
@@ -44,6 +47,13 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     if (spinning || numNames === 0) return;
 
     setSpinning(true);
+
+    //memutar audio
+    if (spinAudioRef.current) {
+      spinAudioRef.current.currentTime = 0;
+      spinAudioRef.current.play();
+    }
+
     const minRotations = 5;
     const maxRotations = 10;
     const randomRotations = Math.floor(Math.random() * (maxRotations - minRotations + 1)) + minRotations;
@@ -63,6 +73,12 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
     setTimeout(() => {
       setSpinning(false);
+
+      //menghentikan audio
+      if (spinAudioRef.current) {
+        spinAudioRef.current.pause();
+        spinAudioRef.current.currentTime = 0;
+      }
 
       const finaleAngle = (totalRotation + extraRotation) % 360;
       // const normalizedAngle = (360 - finaleAngle + segmentAngle / 2) % 360;
@@ -94,6 +110,9 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   return (
     <div className="items-center justify-items-center margin-auto h-[100vh] w-full"
     >
+      <audio ref={spinAudioRef} src="audio/spin-wheel.mp3" loop preload="auto" />
+      {/* <audio ref={winAudioRef} src="audio/victory-chime.mp3" preload="auto" /> */}
+
       <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[35%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-45%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
         <div className='flex items-center justify-center md:w-[70%] lg:w-[90%] w-full'>
             <img className='h-auto max-x-[20%] max-w-[20%]' src="images/spinwheel/logo-mc.png" alt="" />

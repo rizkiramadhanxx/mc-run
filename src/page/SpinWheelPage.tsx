@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import SpinWheel from '../components/SpinWheel/SpinWheel';
 //import useDataStore from '../store/useDataStore';
 //import DaftarNama from '../components/SpinWheel/DaftarNama';
@@ -8,18 +8,43 @@ function SpinWheelPage() {
   const [showNotification, setShowNotification] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
 
+  //audio winner
+  const winAudioRef = useRef<HTMLAudioElement>(null);
+
   const handleSpinEnd = (selectedItem: string) => {
     setResult(`Hasil: ${selectedItem}`);
     setSelectedItem(selectedItem);
     setShowNotification(true);
 
+    //play audio winner
+    if (winAudioRef.current) {
+      winAudioRef.current.currentTime = 0;
+      winAudioRef.current.play();
+    }
+
     setTimeout(() => {
       setShowNotification(false);
-    }, 3000);
+
+      // menghendtikan auio
+      if (winAudioRef.current) {
+        winAudioRef.current.pause();
+        winAudioRef.current.currentTime = 0;
+      }
+    }, 5000);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+    // menghendtikan auio
+    if (winAudioRef.current) {
+      winAudioRef.current.pause();
+      winAudioRef.current.currentTime = 0;
+    }
   };
 
   return (
-      <div style={{ backgroundImage: `url(images/spinwheel/background.png)`, backgroundSize: "cover", backgroundPosition: "center"}}>    
+      <div style={{ backgroundImage: `url(images/spinwheel/background.png)`, backgroundSize: "cover", backgroundPosition: "center"}}> 
+        <audio ref={winAudioRef} src="audio/victory-chime.mp3" preload="auto" />  
         <SpinWheel onSpinEnd={handleSpinEnd} />
         
         {/* {result && (
@@ -46,7 +71,7 @@ function SpinWheelPage() {
               <span className="font-semibold">{selectedItem}</span>
             </p>
             <button
-              onClick={() => setShowNotification(false)}
+              onClick={handleCloseNotification}
               className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors duration-200"
             >
               Tutup
