@@ -1,4 +1,3 @@
-// const RUNNERS_API_URL = 'http://38.47.180.197:2025/api/runner';
 const RUNNERS_API_URL = import.meta.env.VITE_APP_RUNNERS_API_BASE_URL;
 
 export interface Runner {
@@ -8,7 +7,7 @@ export interface Runner {
   run_type: string;
   last_scanned: string;
   createdAt: string;
-  updatedAt: string
+  updatedAt: string;
 }
 
 export interface RunnerRequest {
@@ -69,7 +68,7 @@ export interface PaginatedResponse {
     totalPages: number;
     totalItems: number;
     itemPerPage: number;
-  }
+  };
 }
 
 export interface PaginationParams {
@@ -78,12 +77,14 @@ export interface PaginationParams {
   keyword?: string;
 }
 
-async function createRunner(runnerData: RunnerRequest): Promise<{ error: boolean; data: Runner[] | null }> {
+async function createRunner(
+  runnerData: RunnerRequest
+): Promise<{ error: boolean; data: Runner[] | null }> {
   try {
     const response = await fetch(RUNNERS_API_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(runnerData),
     });
@@ -102,32 +103,37 @@ async function createRunner(runnerData: RunnerRequest): Promise<{ error: boolean
   }
 }
 
-async function getAllRunnersPagination(params:PaginationParams = {}): Promise<{ error: boolean; data: PaginatedResponse | null }> {
-  try
-  { const { page = 1, limit = 10, keyword = '' } = params;
-    const searchParams = new URLSearchParams(
-      {
-        page: page.toString(),
-        limit: limit.toString(),
-        keyword: keyword,
-      }
-    );
+async function getAllRunnersPagination(
+  params: PaginationParams = {}
+): Promise<{ error: boolean; data: PaginatedResponse | null }> {
+  try {
+    const { page = 1, limit = 10, keyword = "" } = params;
+    const searchParams = new URLSearchParams({
+      page: page.toString(),
+      limit: limit.toString(),
+      keyword: keyword,
+    });
 
-    const response = await fetch(`${RUNNERS_API_URL}?${searchParams.toString()}`);
+    const response = await fetch(
+      `${RUNNERS_API_URL}?${searchParams.toString()}`
+    );
     const json = await response.json();
 
     if (!response.ok) {
       throw new Error(`Failed to fetch runners: ${response.statusText}`);
     }
 
-    return { error: false, data:json };
+    return { error: false, data: json };
   } catch (error) {
     console.error("Error fetching runners:", error);
     return { error: true, data: null };
   }
 }
 
-async function getAllRunners(): Promise<{ error: boolean; data: Runner[] | null }> {
+async function getAllRunners(): Promise<{
+  error: boolean;
+  data: Runner[] | null;
+}> {
   try {
     const response = await fetch(RUNNERS_API_URL);
     const json = await response.json();
@@ -145,14 +151,16 @@ async function getAllRunners(): Promise<{ error: boolean; data: Runner[] | null 
   }
 }
 
-async function deleteRunner(id: number): Promise<{ error: boolean; data: DeleteResponse | null }> {
+async function deleteRunner(
+  id: number
+): Promise<{ error: boolean; data: DeleteResponse | null }> {
   try {
     const response = await fetch(`${RUNNERS_API_URL}/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-      }
-    }); 
+        "Content-Type": "application/json",
+      },
+    });
     const json = await response.json();
 
     if (!response.ok) {
@@ -166,7 +174,9 @@ async function deleteRunner(id: number): Promise<{ error: boolean; data: DeleteR
   }
 }
 
-async function getRunnerById(id: number): Promise<{ error: boolean; data: Runner | null }> {
+async function getRunnerById(
+  id: number
+): Promise<{ error: boolean; data: Runner | null }> {
   try {
     const response = await fetch(`${RUNNERS_API_URL}/${id}`);
     const json = await response.json();
@@ -182,12 +192,15 @@ async function getRunnerById(id: number): Promise<{ error: boolean; data: Runner
   }
 }
 
-async function updateRunnerById(id: number, runnerData: UpdateRunnerRequest): Promise<{ error: boolean; data: UpdateRunnerResponse | null }> {
+async function updateRunnerById(
+  id: number,
+  runnerData: UpdateRunnerRequest
+): Promise<{ error: boolean; data: UpdateRunnerResponse | null }> {
   try {
     const response = await fetch(`${RUNNERS_API_URL}/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(runnerData),
     });
@@ -204,11 +217,14 @@ async function updateRunnerById(id: number, runnerData: UpdateRunnerRequest): Pr
   }
 }
 
-async function getLastScannerRunner (): Promise<{ error: boolean; data: Runner | null }> {
+async function getLastScannerRunner(): Promise<{
+  error: boolean;
+  data: Runner | null;
+}> {
   try {
     const response = await fetch(`${RUNNERS_API_URL}/last-scanned/`);
     const json: GetLastScannerResponse = await response.json();
-  
+
     if (!response.ok) {
       throw new Error(`Failed to fetch runner: ${response.statusText}`);
     }
@@ -220,15 +236,17 @@ async function getLastScannerRunner (): Promise<{ error: boolean; data: Runner |
   }
 }
 
-async function updateLastScannedByBib(bib: string): Promise<{ error: boolean; data: UpdateLastScannedResponse | null }> {
+async function updateLastScannedByBib(
+  bib: string
+): Promise<{ error: boolean; data: UpdateLastScannedResponse | null }> {
   try {
     const response = await fetch(`${RUNNERS_API_URL}/scan-bib/${bib}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
-    
+
     const json: UpdateLastScannedResponse = await response.json();
 
     if (!response.ok) {
@@ -242,5 +260,13 @@ async function updateLastScannedByBib(bib: string): Promise<{ error: boolean; da
   }
 }
 
-
-export { getAllRunners, createRunner, deleteRunner, getRunnerById, updateRunnerById, getLastScannerRunner, updateLastScannedByBib, getAllRunnersPagination };
+export {
+  getAllRunners,
+  createRunner,
+  deleteRunner,
+  getRunnerById,
+  updateRunnerById,
+  getLastScannerRunner,
+  updateLastScannedByBib,
+  getAllRunnersPagination,
+};
