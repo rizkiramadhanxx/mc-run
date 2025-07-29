@@ -76,15 +76,25 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   };
 
   // Generate colors for segments
+  // const getSegmentColor = (index: number) => {
+  //   const hue = (index * (360 / numNames)) % 360;
+  //   return `hsl(${hue}, 70%, 50%)`;
+  // };
+
+    // Generate colors for segments
   const getSegmentColor = (index: number) => {
-    const hue = (index * (360 / numNames)) % 360;
-    return `hsl(${hue}, 70%, 50%)`;
+    return index % 2 === 0 ? '#004D29' : '#FFFFFF';
+  };
+
+  // Generate colors for text
+  const getTextColor = (index: number) => {
+    return index % 2 === 0 ? '#FFFFFF' : '#004D29';
   };
 
   return (
     <div className="items-center justify-items-center margin-auto h-[100vh] w-full"
     >
-      <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[30%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-30%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
+      <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[35%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-45%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
         <div className='flex items-center justify-center md:w-[70%] lg:w-[90%] w-full'>
             <img className='h-auto max-x-[20%] max-w-[20%]' src="images/spinwheel/logo-mc.png" alt="" />
             <img className='h-auto ml-2 max-w-[20%]' src="images/spinwheel/logo-anniversary.png" alt="" />
@@ -95,11 +105,23 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
       </div>
       
       <div className="absolute w-[30%] h-auto md:top-[20%] lg:top-[15%] md:right-35 lg:right-[25%] md:w-[40%] lg:w-[35%] xl:w-[30%]">
+        
+        <div className='mt-[-8%] absolute top-[100%] left-1/2 -translate-x-1/2 w-full'>
+          <img 
+            src='images/spinwheel/kaki-spinwheel.png'
+            className="w-[100%] h-auto z-0"
+          >
+          </img>
+        </div>
+
         <div
-          className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform ease-out overflow-hidden`}
+          className={`relative w-full h-full rounded-full border-8 border-gray-300 transition-transform ease-out overflow-hidden z-10`}
           style={{ 
             transform: `rotate(${totalRotation}deg)`,
-            transitionDuration: `${duration}s`
+            transitionDuration: `${duration}s`,
+            backgroundImage: `url(/images/spinwheel/roda-spinwheel.png)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           <svg className="w-full h-full" viewBox="0 0 200 200">
@@ -137,7 +159,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
                   <text
                     x={textX}
                     y={textY}
-                    fill="white"
+                    fill={getTextColor(index)}
                     fontSize="12"
                     fontWeight="bold"
                     textAnchor="middle"
@@ -156,11 +178,12 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
             }
           </svg>
         </div>
+        {/* <img className='absolute top-[100%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] z-10' src="images/spinwheel/kaki-spinwheel.png" alt="" /> */}
 
         {/* Center Circle */}
         {
           numNames > 1 && (
-            <div onClick={handleSpin} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-auto z-10">
+            <div onClick={handleSpin} className="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-auto z-20">
               <img src="images/spinwheel/pointer.png" alt="" />
             </div>
           )
@@ -183,21 +206,29 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
           )
         } */}
 
+        {/* <div className='mt-[-7%]'>
+          <img 
+            src='images/spinwheel/kaki-spinwheel.png'
+            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 disabled:bg-gray-400 z-0
+            md:text-1xl md:text-sm md:py-1 md:px-3 lg:text-2xl lg:py-2 lg:px-4 w-[100%] h-auto"
+          >
+          </img>
+        </div> */}
 
-        <div className='mt-4'>
+        {/* <div className='mt-4'>
           <button
             onClick={handleSpin}
-            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-10
-            md:text-1xl md:text-sm md:py-1 md:px-3"
+            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-20
+            md:text-1xl md:text-sm md:py-1 md:px-3 lg:text-2xl lg:py-2 lg:px-4"
             disabled={spinning || name.length <= 1}
           >
             {spinning ? 'Memutar...' : 'Putar Roda!'}
           </button>
-        </div>
+        </div> */}
         
       </div>
       <div className='span-1'>
-        <img className='absolute top-20 right-30 w-[20%] md:w-[24%] lg:w-[20%] md:right-10 lg:right-20' src="images/spinwheel/logo-spinwheel.png" alt="" />
+        <img className='absolute top-20 right-30 w-[20%] md:w-[24%] lg:w-[25%] md:right-10 lg:right-20 z-50' src="images/spinwheel/logo-spinwheel.png" alt="" />
         <img onClick={handleSettingsClick} className='absolute bottom-0 right-20 w-[28%] md:w-[25%] md:right-2' src="images/spinwheel/model.png" alt="" />
       </div>
 
