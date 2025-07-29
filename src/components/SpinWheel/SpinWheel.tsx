@@ -21,6 +21,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   //audio spin
   const spinAudioRef = useRef<HTMLAudioElement>(null);
+  const mainTheme = useRef<HTMLAudioElement>(null);
 
   const numNames = name.length;
   const segmentAngle = 360 / Math.max(1, numNames);
@@ -37,6 +38,12 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
   };
   // Daftar Nama-------------------------------------------------------
 
+  const handleMainThemeClick = () => {
+    if (mainTheme.current) {
+      mainTheme.current.currentTime = 0;
+      mainTheme.current.play();
+    }
+  };
 
   const handleSettingsClick = () => {
     setModalSettingsOpen(true);
@@ -52,6 +59,11 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     if (spinAudioRef.current) {
       spinAudioRef.current.currentTime = 0;
       spinAudioRef.current.play();
+    }
+
+    if (mainTheme.current) {
+      mainTheme.current.pause();
+      mainTheme.current.currentTime = 0;
     }
 
     const minRotations = 5;
@@ -111,6 +123,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     <div className="items-center justify-items-center margin-auto h-[100vh] w-full"
     >
       <audio ref={spinAudioRef} src="audio/spin-wheel.mp3" loop preload="auto" />
+      <audio ref={mainTheme} src="audio/main-theme.mp3" loop preload="auto" />
       {/* <audio ref={winAudioRef} src="audio/victory-chime.mp3" preload="auto" /> */}
 
       <div className='absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[35%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-45%] md:left-[-5%] lg:left-[5%] justify-items-center items-end'>
@@ -119,7 +132,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
             <img className='h-auto ml-2 max-w-[20%]' src="images/spinwheel/logo-anniversary.png" alt="" />
         </div>
         <div className='flex justify-center w-full'>
-          <img className='md:w-[75%] lg:w-[100%] xl:w-[90%]' src="images/spinwheel/left-image.png" alt=""/>
+          <img onClick={handleMainThemeClick} className='md:w-[75%] lg:w-[100%] xl:w-[90%]' src="images/spinwheel/left-image.png" alt=""/>
         </div>
       </div>
       
@@ -190,7 +203,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
                 </g>
               );
             }) : (
-              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="white">
+              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="white" className='bg-blue-500'>
                 Masukkan nama minimal 2
               </text>
             )
