@@ -39,8 +39,14 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   const handleMainThemeClick = () => {
     if (mainTheme.current) {
-      mainTheme.current.currentTime = 0;
-      mainTheme.current.play();
+      if (!mainTheme.current.paused) {
+        // Kalau lagi main → pause
+        mainTheme.current.pause();
+      } else {
+        // Kalau lagi pause → play dari awal
+        mainTheme.current.currentTime = 0;
+        mainTheme.current.play();
+      }
     }
   };
 
@@ -48,8 +54,16 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
 
   const handleSirineClick = () => {
     if (sirineSound.current) {
-      sirineSound.current.currentTime = 0;
-      sirineSound.current.play();
+      if (!sirineSound.current.paused) {
+        // Sirine sedang aktif → matikan
+        sirineSound.current.pause();
+        sirineSound.current.currentTime = 0;
+      } else {
+        // Sirine mati → nyalakan
+        sirineSound.current.currentTime = 0;
+        sirineSound.current.play();
+        mainTheme.current?.pause();
+      }
     }
   };
 
@@ -71,6 +85,11 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     if (mainTheme.current) {
       mainTheme.current.pause();
       mainTheme.current.currentTime = 0;
+    }
+
+    if (sirineSound.current) {
+      sirineSound.current.pause();
+      sirineSound.current.currentTime = 0;
     }
 
     const minRotations = 5;
