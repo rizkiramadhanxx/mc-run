@@ -103,12 +103,6 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
     }, duration * 1000);
   };
 
-  // Generate colors for segments
-  // const getSegmentColor = (index: number) => {
-  //   const hue = (index * (360 / numNames)) % 360;
-  //   return `hsl(${hue}, 70%, 50%)`;
-  // };
-
     // Generate colors for segments
   const getSegmentColor = (index: number) => {
     return index % 2 === 0 ? '#004D29' : '#FFFFFF';
@@ -203,9 +197,26 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
                 </g>
               );
             }) : (
-              <text x="100" y="100" textAnchor="middle" dominantBaseline="central" fontSize="14" fill="white" className='bg-blue-500'>
-                Masukkan nama minimal 2
-              </text>
+              <g>
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="90" // Radius yang sama dengan segmen roda Anda
+                  fill="#004D29" // Warna latar belakang yang Anda inginkan
+                  stroke="#fff"
+                  strokeWidth="2"
+                />
+                <text
+                  x="100"
+                  y="100"
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="14"
+                  fill="white"
+                >
+                  Masukkan nama minimal 2
+                </text>
+              </g>
             )
             }
           </svg>
@@ -220,43 +231,6 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
             </div>
           )
         }
-        
-
-        {/* Pointer */}
-        {/* <div className="absolute top-6 justify-start left-1/2 -translate-x-1/2 w-[6%] h-auto
-          border-t-[30px] border-b-red-500 z-20
-          border-l-[15px] border-l-transparent
-          border-r-[15px] border-r-transparent
-          ">
-        </div> */}
-
-        {/* {
-          showNotification && !spinning && (
-            <div className="fixed top-10 left-0 w-full h-2/4 flex items-center justify-center z-50 text-red-500 text-3xl">
-              Selamat! Kepada: {selectedItem}
-            </div>
-          )
-        } */}
-
-        {/* <div className='mt-[-7%]'>
-          <img 
-            src='images/spinwheel/kaki-spinwheel.png'
-            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 disabled:bg-gray-400 z-0
-            md:text-1xl md:text-sm md:py-1 md:px-3 lg:text-2xl lg:py-2 lg:px-4 w-[100%] h-auto"
-          >
-          </img>
-        </div> */}
-
-        {/* <div className='mt-4'>
-          <button
-            onClick={handleSpin}
-            className="absolute left-1/2 -translate-x-1/2 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 disabled:bg-gray-400 z-20
-            md:text-1xl md:text-sm md:py-1 md:px-3 lg:text-2xl lg:py-2 lg:px-4"
-            disabled={spinning || name.length <= 1}
-          >
-            {spinning ? 'Memutar...' : 'Putar Roda!'}
-          </button>
-        </div> */}
         
       </div>
       <div className='span-1'>
