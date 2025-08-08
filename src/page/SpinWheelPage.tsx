@@ -1,10 +1,12 @@
-import { useState, useRef } from "react";
-import SpinWheel from "../components/SpinWheel/SpinWheel";
+import { useState, useRef } from 'react';
+import SpinWheel from '../components/SpinWheel/SpinWheel';
+//import useDataStore from '../store/useDataStore';
+//import DaftarNama from '../components/SpinWheel/DaftarNama';
 
 function SpinWheelPage() {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
   const [showNotification, setShowNotification] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState('');
 
   //audio winner
   const winAudioRef = useRef<HTMLAudioElement>(null);
@@ -20,15 +22,15 @@ function SpinWheelPage() {
       winAudioRef.current.play();
     }
 
-    // setTimeout(() => {
-    //   setShowNotification(false);
+    setTimeout(() => {
+      setShowNotification(false);
 
-    //   // menghendtikan auio
-    //   if (winAudioRef.current) {
-    //     winAudioRef.current.pause();
-    //     winAudioRef.current.currentTime = 0;
-    //   }
-    // }, 5000);
+      // menghendtikan auio
+      if (winAudioRef.current) {
+        winAudioRef.current.pause();
+        winAudioRef.current.currentTime = 0;
+      }
+    }, 5000);
   };
 
   const handleCloseNotification = () => {
@@ -41,34 +43,30 @@ function SpinWheelPage() {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(images/spinwheel/background.png)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <audio
-        ref={winAudioRef}
-        src="audio/victory-chime.mp3"
-        loop
-        preload="auto"
-      />
-      <SpinWheel onSpinEnd={handleSpinEnd} />
+      <div style={{ backgroundImage: `url(images/spinwheel/background.png)`, backgroundSize: "cover", backgroundPosition: "center"}}> 
+        <audio ref={winAudioRef} src="audio/victory-chime.mp3" loop preload="auto" />  
+        <SpinWheel onSpinEnd={handleSpinEnd} />
+        
+        {/* {result && (
+          <div className="text-center mt-8 text-xl font-semibold text-blue-600">
+            {result}
+          </div>
+        )} */}
+            
+      
+      {/* <DaftarNama /> */}
 
       {/* POPUP Notification */}
       {!result ? null : (
         <div
           className={`fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 transition-opacity duration-300 ${
             showNotification
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-95 pointer-events-none"
+              ? 'opacity-100 scale-100'
+              : 'opacity-0 scale-95 pointer-events-none'
           }`}
         >
           <div className="bg-white p-8 rounded-lg shadow-xl text-center transform transition-transform duration-300 max-w-md w-full scale-100">
-            <h2 className="text-6xl font-bold text-green-600 mb-4">
-              🎉 Selamat!
-            </h2>
+            <h2 className="text-6xl font-bold text-green-600 mb-4">🎉 Selamat!</h2>
             <p className="text-6xl text-gray-800 mb-6">
               <span className="font-semibold">{selectedItem}</span>
             </p>
@@ -81,8 +79,10 @@ function SpinWheelPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+ 
+
   );
-}
+};
 
 export default SpinWheelPage;
