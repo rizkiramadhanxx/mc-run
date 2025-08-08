@@ -158,7 +158,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({ onSpinEnd }) => {
         preload="auto"
       />
       <audio ref={mainTheme} src="audio/main-theme.mp3" loop preload="auto" />
-      <audio ref={sirineSound} src="audio/alarm.mp3" preload="auto" />
+      <audio ref={sirineSound} src="audio/sirine.mp3" preload="auto" />
 
       <div className="absolute grid grid-rows-2 md:w-[50%] lg:w-[33%] xl:w-[35%] h-auto md:top-[-25%] lg:top-[-35%] xl:top-[-45%] md:left-[-5%] lg:left-[5%] justify-items-center items-end">
         <div className="flex items-center justify-center md:w-[70%] lg:w-[90%] w-full">
