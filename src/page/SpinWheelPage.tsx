@@ -25,7 +25,7 @@ function SpinWheelPage() {
     setTimeout(() => {
       setShowNotification(false);
 
-      // menghendtikan auio
+      // menghendtikan audio
       if (winAudioRef.current) {
         winAudioRef.current.pause();
         winAudioRef.current.currentTime = 0;
