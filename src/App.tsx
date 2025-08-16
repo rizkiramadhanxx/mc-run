@@ -28,10 +28,6 @@ function App() {
       path: "/spinwheel",
       element: <SpinWheelPage />,
     },
-    // {
-    //   path: "/bibchecker",
-    //   element: <BibChecker />
-    // }
   ]);
   return <RouterProvider router={router} />;
 }
