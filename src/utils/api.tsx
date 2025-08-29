@@ -217,12 +217,13 @@ async function updateRunnerById(
   }
 }
 
-async function getLastScannerRunner(): Promise<{
-  error: boolean;
-  data: Runner | null;
-}> {
+async function getLastScannerRunner(
+  isTwo: boolean = false
+): Promise<{ error: boolean; data: Runner | null }> {
   try {
-    const response = await fetch(`${RUNNERS_API_URL}/last-scanned/`);
+    const response = await fetch(
+      `${RUNNERS_API_URL}/last-scanned` + (isTwo ? "?last_scanned_2=true" : "")
+    );
     const json: GetLastScannerResponse = await response.json();
 
     if (!response.ok) {

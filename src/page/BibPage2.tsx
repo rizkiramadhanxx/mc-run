@@ -21,7 +21,9 @@ function BibPage2() {
   const { data, isLoading, isError, error } = useQuery<Runner, Error>({
     queryKey: ["runnersData2"],
     queryFn: async () => {
-      const { data: runners, error: apiError } = await getLastScannerRunner();
+      const { data: runners, error: apiError } = await getLastScannerRunner(
+        true
+      );
       if (apiError || !runners) {
         throw new Error(apiError ? "Failed to fetch data" : "No data found");
       }
