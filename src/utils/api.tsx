@@ -75,6 +75,8 @@ export interface PaginationParams {
   page?: number;
   limit?: number;
   keyword?: string;
+  sortBy?: "updatedAt" | "last_scanned" | "name" | "bib" | "run_type";
+  sortOrder?: "asc" | "desc";
 }
 
 async function createRunner(
@@ -107,11 +109,20 @@ async function getAllRunnersPagination(
   params: PaginationParams = {}
 ): Promise<{ error: boolean; data: PaginatedResponse | null }> {
   try {
-    const { page = 1, limit = 10, keyword = "" } = params;
+    const {
+      page = 1,
+      limit = 10,
+      keyword = "",
+      sortBy = "updatedAt",
+      sortOrder = "desc",
+    } = params;
+
     const searchParams = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
       keyword: keyword,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
     });
 
     const response = await fetch(
@@ -238,14 +249,19 @@ async function getLastScannerRunner(
 }
 
 async function updateLastScannedByBib(
-  bib: string
+  bib: string,
+  isTwo: boolean = false
 ): Promise<{ error: boolean; data: UpdateLastScannedResponse | null }> {
   try {
-    const response = await fetch(`${RUNNERS_API_URL}/scan-bib/${bib}`, {
+    const response = await fetch(`${RUNNERS_API_URL}/scan-bib`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        bib: bib,
+        last_scanned_2: isTwo ? "true" : "false",
+      }),
     });
 
     const json: UpdateLastScannedResponse = await response.json();
