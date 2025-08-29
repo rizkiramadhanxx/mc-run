@@ -114,7 +114,7 @@ async function getAllRunnersPagination(
       limit = 10,
       keyword = "",
       sortBy = "updatedAt",
-      sortOrder = "desc",
+      sortOrder = "asc",
     } = params;
 
     const searchParams = new URLSearchParams({
