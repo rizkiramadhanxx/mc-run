@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import type { Runner } from "../utils/api";
 import { getLastScannerRunner } from "../utils/api";
-import backgroundBib from "../assets/img/background-bib.jpg";
 import { useBibPositionStore } from "../store/useBibPositionStore";
 
 function BibPage() {
@@ -88,14 +87,20 @@ function BibPage() {
   }
 
   return (
-    <main
-      className="bg-cover bg-center bg-no-repeat w-full"
-      style={{
-        backgroundImage: `url(${backgroundBib})`,
-        minHeight: "100vh",
-        height: "100vh",
-      }}
-    >
+    <main className="relative w-full h-screen overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-contain"
+        style={{ zIndex: -1, transform: "scale(1.2)" }}
+      >
+        <source src="/video/bg-video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <section className="relative w-full h-full p-4">
         <div
           className="absolute"
@@ -105,12 +110,13 @@ function BibPage() {
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          <p className="text-3xl sm:text-4xl md:text-5xl font-semibold text-left text-white mt-2 font-Poppins">
+          {/* one line */}
+          <div className="text-4xl text-center sm:text-7xl md:text-8xl font-semibold text-white my-2 font-Anton tracking-wider whitespace-nowrap">
             {data.name}
-          </p>
-          <h1 className="text-6xl  sm:text-7xl md:text-8xl font-extrabold text-left text-white my-2 font-Anton tracking-wider">
+          </div>
+          <div className="text-4xl text-center sm:text-4xl md:text-8xl font-semibold text-white mt-2 font-Poppins whitespace-nowrap">
             {data.bib}
-          </h1>
+          </div>
         </div>
       </section>
     </main>
