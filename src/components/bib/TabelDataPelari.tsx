@@ -74,7 +74,7 @@ function TabelDataPelari({
     // }
   };
 
-  const debounceInput = debounce(handleSubmit, 1000);
+  const debounceInput = debounce(handleSubmit, 3000);
 
   useEffect(() => {
     if (bib) {
